@@ -1,0 +1,12 @@
+{
+    "package": "net.skytreader.kode",
+    "class_name": "NutritionFacts",
+    "fields":{
+        "servingSize": {"type":"int", "required":true},
+        "servings": {"type":"int", "required":true},
+        "calories": {"type":"int", "required":false, "default":0},
+        "fat": {"type":"int", "default": 0},
+        "sodium": {"type":"int", "default": 0},
+        "carbohydrate": {"type":"int", "default": 0}
+    }
+}
