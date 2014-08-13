@@ -40,14 +40,15 @@ class JavaWriter(object):
                         match = self.grouper_stack.pop()
                     except IndexError:
                         raise JavaSyntaxError(code_line)
+                        
+            if code_line[len(code_line) - 1] in JavaWriter.CLOSE_GROUPERS:
+                self.current_indent_count -= 4
 
             indent = " " * self.current_indent_count
             self.code_base.append(indent + code_line)
 
             if code_line[len(code_line) - 1] in JavaWriter.OPEN_GROUPERS:
                 self.current_indent_count += 4
-            elif code_line[len(code_line) - 1] in JavaWriter.CLOSE_GROUPERS:
-                self.current_indent_count -= 4
 
     def __str__(self):
         return "\n".join(self.code_base)
@@ -87,6 +88,16 @@ def json_to_java(filename):
         field_type = json_desc["fields"][opt_field]["type"]
         default = str(json_desc["fields"][opt_field]["default"])
         jwriter.add_line("private " + field_type + " " + opt_field + " = " + default + ";")
+
+    # Builder constructor
+    jwriter.add_line("")
+    constructor_args = ", ".join([json_desc["fields"][f]["type"] + " " + f for f in required_fields])
+    jwriter.add_line("public Builder(" + constructor_args + "){")
+
+    for req_field in required_fields:
+        jwriter.add_line("this." + req_field + " = " + req_field + ";")
+
+    jwriter.add_line("}")
 
     return str(jwriter)
 
