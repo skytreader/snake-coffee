@@ -99,6 +99,34 @@ def json_to_java(filename):
 
     jwriter.add_line("}")
 
+    for opt_field in optional_fields:
+        field_type = json_desc["fields"][opt_field]["type"]
+        jwriter.add_line("")
+        jwriter.add_line("public Builder " + opt_field + "(" + field_type + " val){")
+        jwriter.add_line(opt_field + " = val;")
+        jwriter.add_line("return this;")
+        jwriter.add_line("}")
+
+    # The build method
+    jwriter.add_line("")
+    jwriter.add_line("public " + json_desc["class_name"] + " build(){")
+    jwriter.add_line("return new " + json_desc["class_name"] + "(this);")
+    jwriter.add_line("}")
+
+    # Close the builder class
+    jwriter.add_line("}")
+    jwriter.add_line("")
+
+    # The actual constructor
+    jwriter.add_line("private " + json_desc["class_name"] + "(Builder builder){")
+    for field in json_desc["fields"].keys():
+        jwriter.add_line(field + " = builder." + field + ";")
+
+    jwriter.add_line("}")
+
+    # Close the whole class
+    jwriter.add_line("}")
+
     return str(jwriter)
 
 if __name__ == "__main__":
