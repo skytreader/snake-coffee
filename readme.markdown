@@ -17,4 +17,4 @@ Some notes:
  - If the type (and, consequently, default) is not a primitive (or a member of 
    `java.lang`) you can still use this like so
 
-    "myOwnField": {"type":"OwnType", "default":"new OwnType()"}
+        "myOwnField": {"type":"OwnType", "default":"new OwnType()"}
