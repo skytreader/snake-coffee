@@ -14,3 +14,7 @@ Some notes:
 
  - For the `fields` map, the `"required": true` flag can be absent if field is
    not required. However, _all_ optional fields require the `default` key.
+ - If the type (and, consequently, default) is not a primitive (or a member of 
+   `java.lang`) you can still use this like so
+
+    "myOwnField": {"type":"OwnType", "default":"new OwnType()"}
