@@ -12,16 +12,20 @@ def null_gen(arg_list, call, case_name, catcher):
     catcher - `String` JUnit expection catcher
     """
     limit = len(arg_list)
+    generated_test = []
 
     for i in range(limit):
         spam = arg_list[i]
         arg_list[i] = "null"
-        print("@Test")
-        print("public void " + case_name + str(i) + "(){")
-        print("    " + catcher + ";")
-        print("    " + call + "(" + ",".join(arg_list) + ");")
-        print("}")
+        generated_test.append("@Test")
+        generated_test.append("public void test" + case_name + str(i) + "(){")
+        generated_test.append("    " + catcher + ";")
+        generated_test.append("    " + call + "(" + ','.join(arg_list) + ");")
+        generated_test.append("}")
+        generated_test.append("")
         arg_list[i] = spam
+
+    return "\n".join(generated_test)
 
 if __name__ == "__main__":
     print("Just a collection of functions for generating standard but boring test cases.")
