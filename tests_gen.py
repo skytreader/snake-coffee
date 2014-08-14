@@ -33,20 +33,20 @@ class FunctionsTest(unittest.TestCase):
     def test_null_gen(self):
         plain_string_test = null_gen(['"something1"', '"something2"'],
           "MyObject mo = new MyObject", "MyObjectNull",
-          "expection.expect(NullPointerException.class)")
+          "exception.expect(NullPointerException.class)")
 
         expected_plain_string_test = """@Test
 public void testMyObjectNull0(){
-    expection.expect(NullPointerException.class);
+    exception.expect(NullPointerException.class);
     MyObject mo = new MyObject(null,"something2");
 }
 
 @Test
 public void testMyObjectNull1(){
-    expection.expect(NullPointerException.class);
+    exception.expect(NullPointerException.class);
     MyObject mo = new MyObject("something1",null);
 }
-        """
+"""
         
         self.assertEqual(plain_string_test, expected_plain_string_test)
 
