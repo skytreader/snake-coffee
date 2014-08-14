@@ -1,4 +1,5 @@
 import sys
+import unittest
 
 def null_gen(arg_list, call, case_name, catcher):
     """
@@ -27,5 +28,27 @@ def null_gen(arg_list, call, case_name, catcher):
 
     return "\n".join(generated_test)
 
+class FunctionsTest(unittest.TestCase):
+    
+    def test_null_gen(self):
+        plain_string_test = null_gen(['"something1"', '"something2"'],
+          "MyObject mo = new MyObject", "MyObjectNull",
+          "expection.expect(NullPointerException.class)")
+
+        expected_plain_string_test = """@Test
+public void testMyObjectNull0(){
+    expection.expect(NullPointerException.class);
+    MyObject mo = new MyObject(null,"something2");
+}
+
+@Test
+public void testMyObjectNull1(){
+    expection.expect(NullPointerException.class);
+    MyObject mo = new MyObject("something1",null);
+}
+        """
+        
+        self.assertEqual(plain_string_test, expected_plain_string_test)
+
 if __name__ == "__main__":
-    print("Just a collection of functions for generating standard but boring test cases.")
+    unittest.main()
