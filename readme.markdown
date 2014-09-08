@@ -18,3 +18,18 @@ Some notes:
    `java.lang`) you can still use this like so
 
         "myOwnField": {"type":"OwnType", "default":"new OwnType()"}
+
+# exceptions.py
+
+Creating your own Exceptions in Java is tedious. Most of the time, it's
+sufficient to just override a bunch of constructors and then poof! The only
+variable thing is the package name and the class name.
+
+Hence this script! Just pass a JSON object of the form
+
+    {
+        "package":"net.skytreader.kode",
+        "class":"TheOnlyException"
+    }
+
+And you get all your constructors overriden for you.
