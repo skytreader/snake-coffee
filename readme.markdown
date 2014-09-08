@@ -19,7 +19,7 @@ Some notes:
 
         "myOwnField": {"type":"OwnType", "default":"new OwnType()"}
 
-# exceptions.py
+# exception.py
 
 Creating your own Exceptions in Java is tedious. Most of the time, it's
 sufficient to just override a bunch of constructors and then poof! The only
