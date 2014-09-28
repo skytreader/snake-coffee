@@ -26,7 +26,7 @@ def make_exception(filename):
     jsonf = json.load(open(filename))
     jwriter = JavaWriter()
 
-    jwriter.add_line("package " + jsonf["package"])
+    jwriter.add_line("package " + jsonf["package"] + ";")
     jwriter.add_line("")
     jwriter.add_line("public class " + jsonf["class"] + " extends Exception{")
 
