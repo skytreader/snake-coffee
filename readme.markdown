@@ -50,11 +50,11 @@ the code.
 Say, for instance, I have two config fields `app_port` and `db_port`:
 
     public int getAppPort(){
-        return Integer.parseInt(configFile.getProperty("app_port"));
+        return Integer.parseInt(configFile.getProperty("app-port"));
     }
 
     public int getDbPort(){
-        return Integer.parseInt(configFile.getProperty("db_port"));
+        return Integer.parseInt(configFile.getProperty("db-port"));
     }
 
 Then, I suddenly decide to make it that `db_port` is always +10 of the value
@@ -80,7 +80,7 @@ script. The structure is as follows:
 
     {
         "package":"net.skytreader.kode",
-        "config-field":[]
+        "config-fields":[]
     }
 
 The expected contents of `config-field` are JSON dictionaries with the following
