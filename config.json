@@ -1,0 +1,13 @@
+{
+    "package":"net.skytreader.kode",
+    "config-fields":[
+        {
+            "field-name":"app-port",
+            "return-type":"int"
+        },
+        {
+            "field-name":"db-port",
+            "return-type":"int"
+        }
+    ]
+}
