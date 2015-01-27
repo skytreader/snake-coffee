@@ -47,7 +47,7 @@ derived from the config file or change the structure of the config file. This
 pattern allows for such changes to be as transparent as possible to the rest of
 the code.
 
-Say, for instance, I have two config fields `app_port` and `db_port`:
+Say, for instance, I have two config fields `app-port` and `db-port`:
 
     public int getAppPort(){
         return Integer.parseInt(configFile.getProperty("app-port"));
@@ -57,10 +57,10 @@ Say, for instance, I have two config fields `app_port` and `db_port`:
         return Integer.parseInt(configFile.getProperty("db-port"));
     }
 
-Then, I suddenly decide to make it that `db_port` is always +10 of the value
-of `app_port` (debate as to the merits of this "decision" is moot since this _is
-just an example_). Without the config object, I would have to search through my
-code for wherever I had need for `db_port` and adjust it accordingly. With
+Then, I suddenly decide to make it that `db-port` is always +10 of the value
+of `app-port` (debate as to the merits of this "decision" is moot since this _is
+just an example!!!_). Without the config object, I would have to search through
+my code for wherever I had need for `db-port` and adjust it accordingly. With
 config object, I can just
 
     public int getDbPort(){
@@ -90,5 +90,7 @@ format:
         "field-name":"app-port",
         "return-type":"int",
     }
+
+All Java primitives minus `char` plus `String` are valid for `return-type`.
 
 The output class is named `ConfigReader`.
