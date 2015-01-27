@@ -45,7 +45,7 @@ def generate_config(cfg_path):
     jwriter.add_line("")
 
     for config_field in cfg["config-fields"]:
-        jwriter.add_line("public get" + config_field["return-type"] + " " + __upper_names(config_field["field-name"]) + "{")
+        jwriter.add_line("public " + config_field["return-type"] + " get" + __upper_names(config_field["field-name"]) + "(){")
         jwriter.add_line("return " + wrapper_mapper("configFile.getProperty(\""  + config_field["field-name"] + "\")",
           config_field["return-type"]) + ";")
         jwriter.add_line("}")
