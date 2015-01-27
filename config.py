@@ -8,14 +8,17 @@ from builder import JavaWriter
 
 IO_CONFIG_IMPORTS = ("FileWriter", "IOException", "PrintWriter", "Reader")
 OTHER_CONFIG_IMPORTS = ("java.util.Properties",)
-WRAPPER_MAP = {"int":"Integer.parseInt(%s)"}
+WRAPPER_MAP = {"byte":"Byte.parseByte(%s)", "short":"Short.parseShort(%s)",
+  "int":"Integer.parseInt(%s)", "long":"Long.parseLong(%s)",
+  "float":"Float.parseFloat(%s)", "double":"Double.parseDouble(%s)",
+  "boolean":"Boolean.parseBoolean(%s)", "String":"%s"}
 
 def __upper_names(cfg_field):
     words = re.split("[\-_]", cfg_field)
     return "".join((w[0].upper() + w[1:len(w)] for w in words))
 
 def wrapper_mapper(cfg_field, return_type):
-    
+    return WRAPPER_MAP[return_type] % cfg_field
 
 def generate_config(cfg_path):
     cfg = json.load(open(cfg_path))
@@ -43,7 +46,8 @@ def generate_config(cfg_path):
 
     for config_field in cfg["config-fields"]:
         jwriter.add_line("public get" + config_field["return-type"] + " " + __upper_names(config_field["field-name"]) + "{")
-        jwriter.add_line("return configFile.getProperty(\""  + config_field["field-name"] + "\");")
+        jwriter.add_line("return " + wrapper_mapper("configFile.getProperty(\""  + config_field["field-name"] + "\")",
+          config_field["return-type"]) + ";")
         jwriter.add_line("}")
         jwriter.add_line("")
 
